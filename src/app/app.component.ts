@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'awfulWordleV2';
+  title = 'Awful Wordle V2 (Electric Boogaloo)';
+  author = 'Jack';
 }
