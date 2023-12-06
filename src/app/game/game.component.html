@@ -1,28 +1,35 @@
-<div class="container">
-    <div class="row">
-      <div class="col-8" style="background-color: rgb(202, 93, 226); padding: 10px 10px 10px 10px; border: 2px solid black; border-radius: 20px;">
-        <form action="" style="text-align: center; padding: 0 0 20px 0;">
-          <label for="userGuess" style="color:white; text-decoration: underline;">Guess a word:</label>
-          <input type="text" id="userGuess" name="userGuess">
-          <button type="submit">Submit</button>
+<div class="row">
+    <div class="col-8"
+        style="background-color: rgb(202, 93, 226); padding: 10px 10px 10px 10px; border: 2px solid black; border-radius: 20px;">
+
+
+        <form #guessForm="ngForm" action="" style="text-align: center; padding: 0 0 20px 0;">
+            <label for="userGuess" style="color:white; text-decoration: underline;">Guess a word:</label>
+            <input [(ngModel)]="userGuess" type="text" id="userGuess" name="userGuess">
+            <button (click)="submitGuess()" [disabled]="winBool">Submit</button>
         </form>
-  
+
         <table class="table table-striped" name="guesses">
-          <thead class="table-dark">
-            <tr>
-              <th style="width: 40%; text-align: center;">Guess</th>
-              <th style="width: 20%; text-align: center;"># Letters in Word</th>
-              <th style="width: 20%; text-align: center;">Letters in Correct Locations</th>
-              <th style="width: 20%; text-align: center;">Length</th>
-            </tr>
-          </thead>
-          <tbody>
-  
-          </tbody>
+            <thead class="table-dark">
+                <tr>
+                    <th [ngClass]="'tableInfo'" style="width: 40%;">Guess</th>
+                    <th [ngClass]="'tableInfo'">Length</th>
+                    <th [ngClass]="'tableInfo'"># Letters in Word</th>
+                    <th [ngClass]="'tableInfo'">Letters in Correct Locations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let g of allGuesses">
+                    <td>{{g.guess}}</td>
+                    <td>{{g.gLength}}</td>
+                    <td>{{g.correctLetters}}</td>
+                    <td>{{g.correctLocations}}</td>
+                </tr>
+            </tbody>
         </table>
-      </div>
-      <div class="col-4">
-  
-      </div>
+        <h3 *ngIf=winBool style="text-align: center;">{{ winMessage }}</h3>
     </div>
-  </div>
+    <div class="col-4" style="display: flex; align-items: center; justify-content: center;">
+        <button (click)="newGameStart()" type="button" class="btn btn-info" style="border: 3px solid black; padding: 20px 40px 20px 40px;">New Game</button>
+    </div>
+</div>
